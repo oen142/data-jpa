@@ -47,6 +47,19 @@ class MemberJpaRepositoryTest {
             System.out.println("username = " + member1.getUsername());
         }
     }
+    @Test
+    public void bulkAgePlus(){
+        memberJpaRepository.save(new Member("member1" , 10));
+        memberJpaRepository.save(new Member("member2" , 19));
+        memberJpaRepository.save(new Member("member3" , 20));
+        memberJpaRepository.save(new Member("member4" , 21));
+        memberJpaRepository.save(new Member("member5" , 400));
+        memberJpaRepository.save(new Member("member6" , 30));
+
+        int resultCount = memberJpaRepository.bulkAgePlus(20);
+
+        assertThat(resultCount).isEqualTo(4);
+    }
 
 
 }

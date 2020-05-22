@@ -13,11 +13,11 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id" , "name"})
-public class Team {
+public class Team extends BaseTimeEntity{
 
 
     @Id @GeneratedValue
-    @Column(name = "team_id")
+    @Column(name = "team_id" )
     private Long id;
     private String name;
 

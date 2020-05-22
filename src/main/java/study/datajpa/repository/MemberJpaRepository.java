@@ -41,16 +41,25 @@ public class MemberJpaRepository {
                 "select m from Member m", Member.class).getResultList();
     }
 
-    public List<Member> findByUsernameAndAgeGreaterThen(String username , int age){
-        return em.createQuery("select m from Member m where m.username = :username and m.age > :age",Member.class)
-                .setParameter("username" , username)
-                .setParameter("age" , age)
+    public List<Member> findByUsernameAndAgeGreaterThen(String username, int age) {
+        return em.createQuery("select m from Member m where m.username = :username and m.age > :age", Member.class)
+                .setParameter("username", username)
+                .setParameter("age", age)
                 .getResultList();
     }
 
-    public List<Member> findByUsername(String username){
+    public List<Member> findByUsername(String username) {
         List<Member> members = em.createNamedQuery("Member.findByUsername", Member.class)
                 .setParameter("username", username).getResultList();
         return members;
+    }
+
+    public int bulkAgePlus(int age) {
+        return em.createQuery(
+                "update Member m set m.age = m.age + 1" +
+                        " where m.age >= :age")
+                .setParameter("age", age)
+                .executeUpdate();
+
     }
 }
